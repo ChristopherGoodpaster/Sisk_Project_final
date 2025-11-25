@@ -394,6 +394,36 @@ if st.session_state.view_mode == "Target view":
     plt.tight_layout()
     st.pyplot(fig)
 
+    # ---------- NEW: Shot details table below target ----------
+    if st.session_state.shots:
+        st.subheader("Shot details")
+        df_shots = pd.DataFrame(
+            [
+                {
+                    "Shot": s["index"],
+                    "Cant (deg)": s["cant"],
+                    "Horizontal (in)": s["h_in"],
+                    "Vertical (in)": s["v_in"],
+                    "Time of flight (s)": s["t_sec"],
+                    "Path vs LOS (in)": s["y_rel_LOS_in"],
+                    "Off target": s["off_target"],
+                }
+                for s in st.session_state.shots
+            ]
+        )
+        st.dataframe(
+            df_shots.style.format(
+                {
+                    "Cant (deg)": "{:+.2f}",
+                    "Horizontal (in)": "{:+.2f}",
+                    "Vertical (in)": "{:+.2f}",
+                    "Time of flight (s)": "{:.4f}",
+                    "Path vs LOS (in)": "{:+.2f}",
+                }
+            ),
+            width="stretch",
+        )
+
     # Below-plot metrics for current preview
     st.subheader("Current preview (G1 + cant)")
     pp1, pp2, pp3 = st.columns(3)
