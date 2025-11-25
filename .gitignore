@@ -1,0 +1,21 @@
+# --- Python virtual environments ---
+.venv/
+venv/
+ENV/
+env/
+Active/.venv/
+
+# --- Python cache ---
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Streamlit cache ---
+.streamlit/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
